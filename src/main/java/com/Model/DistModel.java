@@ -1,23 +1,27 @@
 package com.Model;
-public class DistModel 
-{
-	private int distId;
-	private String distName;
-	
-	public DistModel()
-	{
-		
+
+public class DistModel {
+	private int districtid;
+	private String districtname;
+
+	public DistModel() {
+
 	}
-	public int getDistId() {
-		return distId;
+
+	public int getDistrictid() {
+		return districtid;
 	}
-	public void setDistId(int distId) {
-		this.distId = distId;
+
+	public void setDistrictid(int districtid) {
+		this.districtid = districtid;
 	}
-	public String getDistName() {
-		return distName;
+
+	public String getDistrictname() {
+		return districtname;
 	}
-	public void setDistName(String distName) {
-		this.distName = distName;
+
+	public void setDistrictname(String districtname) {
+		this.districtname = districtname;
 	}
+
 }

@@ -1,65 +1,44 @@
 package com.crop.Seriveces;
 
 import java.util.List;
-
-import com.Model.CustModel;
 import com.Model.DistModel;
 import com.Model.StateModel;
 import com.crop.Repository.StateRepository;
 import com.crop.Repository.StateRepositoryImpl;
 public class StateServiceImpl implements StateService
 {
-	StateRepository stateRepo=new StateRepositoryImpl();
-
-	@Override
-	public boolean isAddNewState(StateModel model) 
+	StateRepository staterepo = new StateRepositoryImpl();
+	
+	public boolean isAddedNewState(StateModel statemodel) 
 	{
-	
-		return stateRepo.isAddNewState(model);
+		return staterepo.isAddedNewState(statemodel);
 	}
-
-	@Override
-	public boolean AddDataCust(CustModel cmodel) 
+	
+	
+	public List <StateModel> allState()
 	{
-	
-		return stateRepo.AddDataCust(cmodel);
+		return staterepo.allState();
 	}
 
 	@Override
-	public List<StateModel> allState() 
+	public StateModel getStateByName(String stateName)
 	{
-		
-		return stateRepo.allState();
+		return staterepo.getStateByName(stateName);	
+	}
+
+
+	@Override
+	public boolean isDeleteState(String stateName)
+	{
+		return staterepo.isDeleteState(stateName);
 	}
 
 	@Override
-	public List<CustModel> getCustName(String str) {
-		// TODO Auto-generated method stub
-		return null;
+	public boolean isUpdateState(String currName, String newName) 
+	{
+		return staterepo.isUpdateState(currName, newName);
 	}
 
-	//@Override
-//	public boolean isAddNewDist(DistModel dmodel) 
-//	{
-//		
-//		return stateRepo.isAddNewDist(dmodel);
-//	}
-//
-//	@Override
-//	public List<CustModel> getCustName(String str)
-//	{
-//		return stateRepo.getCustName(str);
-//		
-//	}
-//
-//	@Override
-//	public boolean isAddStateDist(String stateName, String distName) 
-//	{
-//		
-//		return stateRepo.isAddStateDist(stateName, distName);
-//	}
-	
-	
 }
 
 

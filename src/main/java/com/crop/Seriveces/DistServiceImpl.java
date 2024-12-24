@@ -1,22 +1,27 @@
 package com.crop.Seriveces;
 
+import java.util.List;
+
 import com.Model.DistModel;
+import com.crop.Repository.*;
+
 
 public class DistServiceImpl implements DistService
 {
 
+	DistRepository distrepo = new DistRepositoryImpl();
+	
 	@Override
-	public boolean isAddNewDist(DistModel dmodel) 
+	public boolean isDistrictAdd(DistModel distmodel) 
 	{
-		// TODO Auto-generated method stub
-		return false;
+		
+		return  distrepo.isDistrictAdd(distmodel);
 	}
 
 	@Override
-	public boolean isAddStateDist(String stateName, String distName)
-	{
-		// TODO Auto-generated method stub
-		return false;
+	public List<DistModel> districtList() {
+	
+		return distrepo.districtList();
 	}
-
+	
 }

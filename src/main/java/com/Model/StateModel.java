@@ -6,25 +6,35 @@ public class StateModel
 {
 	private int stateid;
 	private String statename;
+	
 	public StateModel()
 	{
 		
 	}
-	public StateModel(int stateid,String sname)
+	
+	public StateModel(int stateid , String statename)
 	{
 		this.stateid=stateid;
-		this.statename=statename;
+		this.statename = statename;
 	}
-	public int getSid() {
+
+	public int getStateid() 
+	{
 		return stateid;
 	}
-	public void setSid(int stateid) {
+
+	public void setStateid(int stateid) 
+	{
 		this.stateid = stateid;
 	}
-	public String getSname() {
+
+	public String getStatename() 
+	{
 		return statename;
 	}
-	public void setSname(String statename) {
+
+	public void setStatename(String statename) 
+	{
 		this.statename = statename;
 	}
 	

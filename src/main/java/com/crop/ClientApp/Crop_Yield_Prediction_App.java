@@ -2,8 +2,11 @@ package com.crop.ClientApp;
 
 import org.apache.log4j.*;
 import com.crop.Seriveces.*;
-import com.Model.CustModel;
+import com.Model.AdminMaster;
+import com.Model.CityModel;
+import com.Model.CropModel;
 import com.Model.DistModel;
+import com.Model.OldDataSetModel;
 import com.Model.StateModel;
 
 import java.sql.*;
@@ -11,7 +14,8 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Crop_Yield_Prediction_App {
+public class Crop_Yield_Prediction_App 
+{
 	public static Logger log = Logger.getLogger(Crop_Yield_Prediction_App.class);
 	private static Connection conn;
 	private static PreparedStatement stmt;
@@ -25,179 +29,326 @@ public class Crop_Yield_Prediction_App {
 
 	public static void main(String[] args) 
 	{
-		Scanner sc=new Scanner(System.in);
-		System.out.println("\t\t\t....WELCOME TO CROP YIELD PREDICTION....");
 		
-		List<CustModel> list=new ArrayList<>();
+		SimpleLayout layout = new SimpleLayout();
+		ConsoleAppender console = new ConsoleAppender(layout);
+		log.setLevel(Level.ALL);
+		log.addAppender(console);
+
+		StateService stateService = new StateServiceImpl();
+		DistService distService = new DistServiceImpl();
+		CityService cityService = new CityServiceImpl();
+		OldDataSetService olddataService = new OldDataSetServiceImpl();
+		CropService cropservice = new CropServiceImpl();
+		AdminCredentialService adminservice = new AdminCredentialServiceImpl();
+		CustomerLoginService customerService = new CustomerLoginServiceImpl();
 		
-		StateService stateservice=new StateServiceImpl();
-		DistService distservice=new DistServiceImpl();
-		
-		StateModel model;
-		
-		CustModel cmodel=new CustModel();
-		
-		DistModel dmodel=new DistModel();
-		
-		
-		String admin="1234";
-		System.out.println("1.Admin Login");
-		System.out.println("2.Customer Login");
-		System.out.println("enter your choice");
-		int ch=sc.nextInt();
-		int adminch,custch;
-		sc.nextLine();
-		do
+		StateModel statemodel = new StateModel();
+		DistModel distmodel = new DistModel();
+		CityModel citymodel = new CityModel();
+		OldDataSetModel olddataModel = new OldDataSetModel();
+		CropModel cropModel = new CropModel();
+		AdminMaster adminmaster = new AdminMaster();
+		int choice;
+
+		Scanner sc = new Scanner(System.in);
+		// System.out.println(" Welcome to Crop Yield Prediction App !!! ");
+
+		do 
 		{
-			switch(ch)
+			System.out.println("\t\t\tWelcome to the Crop Yield Prediction App ");
+			System.out.println("\t\t\t****************************************");
+			System.out.println(" LOGIN for ");
+			System.out.println(" 1 : ADMIN ");
+			System.out.println(" 2 : CUSTOMER ");
+			System.out.println(" 3 : System Exit");
+			System.out.println("");
+
+			System.out.println("Enter Your Choice :");
+			choice = sc.nextInt();
+			sc.nextLine();
+
+			switch (choice) 
 			{
-			// Admin Panel
-			
 				case 1:
-					System.out.println("Please enter password");
-					String passkey=sc.nextLine();
-					do
-					{
-						if(passkey.equalsIgnoreCase(admin))
-						{
-						
-							System.out.println("1.Add new State");	
-							System.out.println("2.View All State");
-							System.out.println("3.Add new District");
-							
-							System.out.println("Enter your choice");
-							adminch=sc.nextInt();
-							sc.nextLine();
-							
-							switch(adminch)
-							{
-								
-								case 1:
-									
-									System.out.println("Enter statename");
-									String statename=sc.nextLine();
+
+				System.out.println("Enter username :");
+				String username = sc.nextLine();
+
+				System.out.println("Enter password :");
+				String password = sc.nextLine();
+
+				if (adminservice.isAdminMatch(username, password)) 
+				{
 					
-									boolean b=stateservice.isAddNewState(new StateModel(0,statename));
-									if(b)
-									{
-										log.info("State added Succefully");
-									}
-									else
-									{
-										log.info("State not added");
-									}
-								System.exit(0);
-								break;
-								
-								case 2:
-									stateservice.allState();
-									break;
-									
-								case 3:
-									System.out.println("Enter state name");
-									statename=sc.nextLine();
-									System.out.println("Enter District name");
-									String distname=sc.nextLine();
-									
-									dmodel.setDistName(distname);
-									b=distservice.isAddNewDist(dmodel);
-									if(b)
-									{
-										System.out.println("District added Sucessfully");
-									}
-									else
-									{
-										System.out.println("District not added");
-									}
-									break;
-							}
-						}
-						else
+					System.out.println("\n====================================================\n");
+							    log.info("  Admin Verification Successful :             ");
+							    int choice2;
+					do {
+						System.out.println("\n====================================================\n");
+						System.out.println("1 : Add State");
+						System.out.println("2 : View all State :");
+						System.out.println("3 : Search State Name");
+						System.out.println("4 : Delete State By Id");
+						System.out.println("5 : Update State By Id");
+						System.out.println("6 : Add District :");
+						System.out.println("7 : Display all District :");
+						System.out.println("8 : Add City :");
+						System.out.println("9 : View All Cities :");
+						System.out.println("10: Add Crop Data of Farmer :");
+						System.out.println("11: View All Crops :");
+						System.out.println("12 : To Add Old Data Set ");
+						System.out.println("13 : Display all Old Data  of Three Years :");
+
+						System.out.println("Enter your choice :");
+						choice2 = sc.nextInt();
+
+						switch (choice2) 
 						{
-							System.out.println("Wrong Password");
-						}
-						break;
-					}while(adminch!=0);
-				//Customer Panel
-				case 2:
-				
-					do
-					{
-						System.out.println("1.login customer");
-						System.out.println("2.See Previous data");
-						System.out.println("3.Register");
-						System.out.println("Enter your choice");
-						custch=sc.nextInt();
-						switch(custch)
-						{
-						//New Customer Login
 							case 1:
-								System.out.println("Do you have previous account");
+							boolean isStateAdd = stateService.isAddedNewState(statemodel);
+
+							if (isStateAdd)
+							{
+								System.out.println("\n====================================================\n");
+								log.info("State Added Succcessfully");
+								System.out.println("\n====================================================\n");
+
+							} 
+							else 
+							{
+								log.info("State is not Added :");
+							}
+
+							break;
+
+							case 2:
+
+								stateService.allState();
+
+							break;
+					
+							case 3:
+						
+								System.out.println("Enter state name for search");
 								sc.nextLine();
-								String logReply=sc.nextLine();
-								if(logReply.equalsIgnoreCase("yes"))
+								String stateName=sc.nextLine();
+								StateModel model=stateService.getStateByName(stateName);
+								if(model!=null)
 								{
-									System.out.println("Please enter your id");
-									int custid=sc.nextInt();
-								
-									sc.nextLine();
-									System.out.println("Please enter your name");
-									String custname=sc.nextLine();
-								
-									System.out.println("Please enter your email");
-									String email=sc.nextLine();
-								
-									String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
-									Pattern pattern = Pattern.compile(emailRegex);
-									Matcher matcher = pattern.matcher(email);
-							    
-									if (matcher.matches()) 
-									{
-										System.out.println("The email is valid.");
-									} 
-									else 
-									{
-										System.out.println("The email is invalid.");
-									}
-									cmodel.setCustid(custid);
-									cmodel.setCustname(custname);
-									cmodel.setCustemail(email);
-									boolean c=stateservice.AddDataCust(cmodel);
-									if(c)
-									{
-										log.info("Login sucessfully\n\n");
-									}
-									else
-									{
-										log.info("Failed");
-									}
-									break;
-									
+									System.out.println("=======================================================");
+									System.out.println(model.getStateid()+"\t"+model.getStatename());
+									System.out.println("=======================================================");
 								}
 								else
 								{
-									System.out.println("Please Registered");
+									
+									log.info("State not found");
 								}
 								break;
-							case 2:
-								System.out.println("Enter your name");
+							case 4:
+								System.out.println("Enter State Name for Delete");
 								sc.nextLine();
-								String str=sc.nextLine();
-								
-								list=stateservice.getCustName(str);
+								stateName=sc.nextLine();
+						
+								boolean b=stateService.isDeleteState(stateName);
+								if(b)
+								{
+									log.info("State Deleted Successfully");
+								}
+								else
+								{
+									log.info("State Not Deleted");
+								}
+								break;
+							case 6:
+								boolean isDistAdd = distService.isDistrictAdd(distmodel);
+								if (isDistAdd) 
+								{
+									System.out.println("\n====================================================\n");
+
+									log.info("District Added Successfully :");
+									System.out.println("\n====================================================\n");
+
+								} 
+								else
+								{
+									log.info("Opps !!! Some Error Happens :");
+								}
+								break;
+
+							case 7:
+
+								distService.districtList();
+
+								break;
+
+							case 8:
+
+								boolean isCityAdded = cityService.isCityAdded(citymodel);
+								if (isCityAdded)
+								{
+									System.out.println("\n====================================================\n");
+									log.info("City Added Successfully ");
+								}
+								else 
+								{
+									log.info("Opps !!! Some Problem Occured :");
+									System.out.println("\n====================================================\n");
+
+								}
+
+								break;
+
+							case 9:
+
+								cityService.cityList();
+								break;
+
+							case 10:
+
+								boolean isCropAdded = cropservice.isCropAdded(cropModel);
+								if (isCropAdded)
+								{
+									log.info("Crop Added to the Database :");
+
+								} 
+								else
+								{
+									log.info("Opps !!! Some problem occurs :");
+								}
+
+								break;
+
+							case 11:
+
+								cropservice.allCropList();
+
+								break;
+
+							case 12:
+
+								boolean is_Old_Data_Set_Added = olddataService.isOldDataSetAdded(olddataModel);
+
+								if (is_Old_Data_Set_Added)
+								{
+									log.info("Old Data Set is Successfully Added to your DataBase :");
+
+								} 
+								else
+								{
+									log.info(
+									"Opps !!! Some problem is Occured While entering the data in OLD DATA SET table :");
+								}
+
+								break;
+
+							case 13:
+
+								olddataService.olddataset();
+								break;
+							}
+						}while(choice2!=0);
+					}
+					else 
+					{
+						log.info("Admin Not Found !!! Thank You ");
+					}
+				
+				break;
+			case 2:
+				
+					System.out.println("\n====================================================\n");
+
+					
+
+					System.out.println("\n====================================================\n");
+					int choice3;
+					do
+					{
+						System.out.println(" 1 : Customer LOGIN :");
+						System.out.println(" 2 : Customer Already Registered :");
+						System.out.println(" 3 : Registration of Customer :");
+						System.out.println(" 4 : System Exit :");
+						System.out.println(" Enter Your Choice : ");
+					
+						choice3 = sc.nextInt();
+						switch (choice3)
+						{
+							case 1:
+							System.out.println("Do you have Previous Account : Yes or No");
+							sc.nextLine();
+							String message = sc.nextLine();
+							if (message.equalsIgnoreCase("yes")) 
+							{
+								System.out.println("Enter username :");
+								 username = sc.nextLine();
+
+								System.out.println("Enter password :");
+								password = sc.nextLine();
+
+								if (customerService.isCustomerMatch(username, password)) 
+								{
+									System.out.println("\n====================================================\n");
+
+									System.out.println("Customer Verification Successful ");
+									System.out.println("\n====================================================\n");
+
+							}
+							else 
+							{
+								System.out.println("Opps !!! Customer Not Found : ");
+							}
+						} 
+						else
+						{
+							System.out.println("\n====================================================\n");
+
+							System.out.println("Please do Registration");
+							System.out.println("\n====================================================\n");
+
+						}
+						break;
+					
+							case 2:
+
+								sc.nextLine();
+								System.out.println("Enter Your Email :");
+								String email = sc.nextLine();
+
+								customerService.allLoginCustomer(email);
+
+								break;
+
+							case 3:
+
+								boolean isCustomerLoign =customerService.isAddedCustomerLogin();
+								if(isCustomerLoign)
+								{
+									System.out.println("\n====================================================\n");
+
+									log.info("Customer Registration is Successful :");
+									System.out.println("\n====================================================\n");
+
+							
+								}
+								else
+								{
+									System.out.println("\n====================================================\n");
+
+									log.info("Opps !! Some problem Occurs :");
+							
+									System.out.println("\n====================================================\n");
+
+								}
+
 								break;
 						}
-					}while(custch!=0);
-					
-						//Old Customer data
-					
-							
-						case 3:
-							
-							
-				}
 			
-		}while(ch!=0);
-	}
+					}while(choice3!=0);
+			}
 
+		} while (choice != 0);
+		
+	}
 }

@@ -1,10 +1,12 @@
 package com.crop.Repository;
 
+import java.util.List;
+
 import com.Model.DistModel;
 
 public interface DistRepository 
 {
-	public boolean isAddNewDist(DistModel dmodel);
+	public abstract boolean isDistrictAdd(DistModel distmodel);
 	
-	public boolean isAddStateDist(String stateName,String distName);
+	public abstract List<DistModel>  districtList ();
 }
