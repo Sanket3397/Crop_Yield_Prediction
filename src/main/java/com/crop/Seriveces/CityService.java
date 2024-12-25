@@ -6,6 +6,6 @@ import com.Model.CityModel;
 
 public interface CityService {
 
-	public boolean isCityAdded(CityModel citymodel);
-	public List<CityModel> cityList();
+	public boolean isCityAdded(String distName,String ctyName);
+	public List<CityModel> getAllCity();
 }

@@ -10,18 +10,32 @@ public class DistServiceImpl implements DistService
 {
 
 	DistRepository distrepo = new DistRepositoryImpl();
-	
 	@Override
-	public boolean isDistrictAdd(DistModel distmodel) 
+	public String getStateName(String stateName)
 	{
 		
-		return  distrepo.isDistrictAdd(distmodel);
+		return distrepo.getStateName(stateName);
 	}
+	@Override
+	public boolean isAssociateDistToState(String stateName, String distName)
+	{
+		
+		return distrepo.isAssociateDistToState(stateName, distName);
+	}
+	
 
 	@Override
 	public List<DistModel> districtList() {
 	
 		return distrepo.districtList();
 	}
-	
+	@Override
+	public String getDistrictName(String distName)
+	{
+		
+		return distrepo.getDistrictName(distName);
+	}
+
+
+
 }

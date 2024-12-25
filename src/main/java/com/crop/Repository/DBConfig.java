@@ -15,6 +15,7 @@ public class DBConfig
 	protected static Connection conn;
 	protected static PreparedStatement stmt;
 	protected static ResultSet rs;
+	protected static CallableStatement cstmt;
 	private static DBConfig db=null;
 	
 	private static final Logger log=Logger.getLogger(DBConfig.class);
@@ -87,6 +88,10 @@ public class DBConfig
 	public static ResultSet getResult()
 	{
 		return rs;	
+	}
+	public static CallableStatement getCallStatement()
+	{
+		return cstmt;
 	}
 //	public static void main(String x[])
 //	{

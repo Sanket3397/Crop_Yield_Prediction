@@ -7,38 +7,49 @@ import com.Model.DistModel;
 
 public class DistRepositoryImpl extends DBState implements DistRepository
 {
-Scanner sc = new Scanner(System.in);
+	Scanner sc = new Scanner(System.in);
 	
+
 	@Override
-	public boolean isDistrictAdd(DistModel distmodel) {
-		
+	public boolean isAssociateDistToState(String stateName, String distName)
+	{
 		try
 		{
-			System.out.println("Enter District Name :");
-			String distName = sc.nextLine();			
-			stmt=conn.prepareStatement("insert into distmaster values('0',?)");
-			stmt.setString(1,distName);
-			
-			int result = stmt.executeUpdate();
-					 
-			if(result>0)
-			{
-				return true;
-			}
-			else
-			{
-				return false;
-			}
-			
+			cstmt=conn.prepareCall("{call saveDist(?,?)}");
+			cstmt.setString(1, stateName);
+			cstmt.setString(2, distName);
+			boolean b=cstmt.execute();
+			return !b;
 		}
-		catch(Exception e)
+		catch(Exception ex)
 		{
-			e.printStackTrace();
+			System.out.println(""+ex);
+			return false;
 		}
 		
-		return false;
 	}
-
+	public String getStateName(String stateName)
+	{
+		String fetchname=null;
+		try
+		{
+			stmt=conn.prepareStatement("select * from statemaster where stateName=?");
+			stmt.setString(1, stateName);
+			rs=stmt.executeQuery();
+			while(rs.next())
+			{
+				fetchname=rs.getString(2);
+			}
+		}
+		catch(Exception ex)
+		{
+			ex.getStackTrace();
+			
+		}
+		return fetchname;
+		
+		
+	}
 	@Override
 	public List<DistModel> districtList() {
 		
@@ -64,6 +75,32 @@ Scanner sc = new Scanner(System.in);
 		}
 		return null;
 	}
+	@Override
+	public String getDistrictName(String distName)
+	{
+		String fetchDistName=null;
+		
+		try
+		{
+			stmt=conn.prepareStatement("Select * from distmaster where distName=?");
+			stmt.setString(1, distName);
+			rs=stmt.executeQuery();
+			while(rs.next())
+			{
+				fetchDistName=rs.getString(2);
+			}
+		}
+		catch(Exception ex)
+		{
+			ex.getStackTrace();
+		}
+		return fetchDistName;
+	}
+
+
+
+
+	
 
 
 }

@@ -10,15 +10,16 @@ public class CityServiceImpl implements CityService{
 	CityRepositoryImpl cityRepo=new CityRepositoryImpl();
 	
 	@Override
-	public boolean isCityAdded(CityModel citymodel) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean isCityAdded(String distName,String cityName)
+	{
+		
+		return cityRepo.isAddDistCity(distName, cityName);
 	}
 
 	@Override
-	public List<CityModel> cityList() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<CityModel> getAllCity() 
+	{
+		return cityRepo.getAllCity();
 	}
 	
 }

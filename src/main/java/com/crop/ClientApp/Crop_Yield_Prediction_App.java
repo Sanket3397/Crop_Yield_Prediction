@@ -27,7 +27,7 @@ public class Crop_Yield_Prediction_App
 		log.setLevel(Level.DEBUG);
 	}
 
-	public static void main(String[] args) 
+	public static void main(String[] args) throws SQLException 
 	{
 		
 		SimpleLayout layout = new SimpleLayout();
@@ -91,7 +91,7 @@ public class Crop_Yield_Prediction_App
 						System.out.println("3 : Search State Name");
 						System.out.println("4 : Delete State By Id");
 						System.out.println("5 : Update State By Id");
-						System.out.println("6 : Add District :");
+						System.out.println("6 : Add Single District :");
 						System.out.println("7 : Display all District :");
 						System.out.println("8 : Add City :");
 						System.out.println("9 : View All Cities :");
@@ -162,18 +162,30 @@ public class Crop_Yield_Prediction_App
 								}
 								break;
 							case 6:
-								boolean isDistAdd = distService.isDistrictAdd(distmodel);
-								if (isDistAdd) 
+								String distName;
+								System.out.println("Enter State name");
+								sc.nextLine();
+								stateName=sc.nextLine();
+								String fetchState=distService.getStateName(stateName);		
+								
+								if(fetchState !=null && fetchState.equals(stateName))
 								{
-									System.out.println("\n====================================================\n");
-
-									log.info("District Added Successfully :");
-									System.out.println("\n====================================================\n");
-
-								} 
+									System.out.println("Enter dist name");
+									distName=sc.nextLine();
+									b=distService.isAssociateDistToState(stateName, distName);
+									if(b)
+									{
+										log.info("District added Successfully");
+									}
+									else
+									{
+										log.info("District not added");
+									}
+									
+								}
 								else
 								{
-									log.info("Opps !!! Some Error Happens :");
+									System.out.println("State not matched");
 								}
 								break;
 
@@ -184,25 +196,37 @@ public class Crop_Yield_Prediction_App
 								break;
 
 							case 8:
-
-								boolean isCityAdded = cityService.isCityAdded(citymodel);
-								if (isCityAdded)
+								System.out.println("Enter District name for add city");
+								sc.nextLine();
+								distName=sc.nextLine();
+								
+								String fetchdist=distService.getDistrictName(distName);
+								
+								if(fetchdist != null && fetchdist.equals(distName))
 								{
-									System.out.println("\n====================================================\n");
-									log.info("City Added Successfully ");
+									System.out.println("Enter city name");
+									String cityName=sc.nextLine();
+									
+									b=cityService.isCityAdded(distName, cityName);
+									if(b)
+									{
+										log.info("City added sucessfully");
+									}
+									else
+									{
+										log.info("City not added");
+									}
+									
 								}
-								else 
+								else
 								{
-									log.info("Opps !!! Some Problem Occured :");
-									System.out.println("\n====================================================\n");
-
+									System.out.println("District not found");
 								}
-
+								
 								break;
-
 							case 9:
 
-								cityService.cityList();
+								cityService.getAllCity();
 								break;
 
 							case 10:
