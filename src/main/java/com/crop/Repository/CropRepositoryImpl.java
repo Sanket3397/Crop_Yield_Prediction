@@ -9,28 +9,62 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import com.Model.CropModel;
 
 public class CropRepositoryImpl extends DBState implements CropRepository {
-	@Override
-	public boolean isCropAdded(CropModel cropmodel) {
+	//@Override
+//	public boolean isCropAdded(CropModel cropmodel) {
+//
+//			Scanner sc = new Scanner(System.in);
+//			
+//		try
+//		{
+//			stmt=conn.prepareStatement("insert into cropmaster values(?,?,?,?,?,?,?,?,?,?)");
+//			FileInputStream inputstream=new FileInputStream("E:\\cropdataset.xlsx");
+//			XSSFWorkbook workbook = new XSSFWorkbook(inputstream);
+//			
+//			
+//			
+//		}
+//		catch(Exception ex)
+//		{
+//			ex.getStackTrace();
+//		}
+//		return false;
+//	}
 
-			Scanner sc = new Scanner(System.in);
-			
+
+	@Override
+	public boolean isCropAdded(String cropname, String fertilizer, String temp, Double pH, int rainfall, int stateId,
+			int distId, int cityId, int Area)
+	{
 		try
 		{
-			stmt=conn.prepareStatement("insert into cropmaster values(?,?,?,?,?,?,?,?,?,?)");
-			FileInputStream inputstream=new FileInputStream("E:\\cropdataset.xlsx");
-			XSSFWorkbook workbook = new XSSFWorkbook(inputstream);
+			stmt=conn.prepareStatement("insert into crop values('0',?,?,?,?,?,?,?,?,?)");
+			stmt.setString(1, cropname);
+			stmt.setString(2, fertilizer);
+			stmt.setString(3, temp);
+			stmt.setDouble(4, pH);
+			stmt.setInt(5, rainfall);
+			stmt.setInt(6, stateId);
+			stmt.setInt(7, distId);
+			stmt.setInt(8, cityId);
+			stmt.setInt(9, Area);
 			
-			
-			
+			int result=stmt.executeUpdate();
+			if(result>0)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
 		}
 		catch(Exception ex)
 		{
 			ex.getStackTrace();
+			return false;
 		}
-		return false;
+	
 	}
-
-
 	public List<CropModel> allCropList() {
 
 		try
@@ -51,8 +85,8 @@ public class CropRepositoryImpl extends DBState implements CropRepository {
 				int cityId = rs.getInt("cityId");
 				int Area = rs.getInt("Area");
 				
-				System.out.println("Crop Id :"+ cropId +" Crop Name : "+cropName+ " Crop Fertilizer : "+fertilizer+ " Region Temperature :"+temp+" Soil pH :"
-						+pH+ "  Rainfall :  "+rainfall + " State ID :"+stateId+" DistName :"+distId+" CityId :"+cityId+"Area : "+Area);
+				System.out.println("Crop Id :"+ cropId +"\nCrop Name : "+cropName+ "\nCrop Fertilizer : "+fertilizer+ "\nRegion Temperature :"+temp+"\nSoil pH :"
+						+pH+ "\nRainfall :"+rainfall + "\nState ID :"+stateId+"\nDistName :"+distId+"\nCityId :"+cityId+"\nArea :"+Area);
 				
 			}
 		}
@@ -62,4 +96,7 @@ public class CropRepositoryImpl extends DBState implements CropRepository {
 		}
 		return null;
 	}
+
+
+	
 }

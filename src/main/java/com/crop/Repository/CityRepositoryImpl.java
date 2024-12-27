@@ -18,13 +18,17 @@ public class CityRepositoryImpl extends DBState implements CityRepository
 			
 			boolean b=cstmt.execute();
 			
-			return !b;
+			if(b)
+			{
+				return true;
+			}
 		}
 		catch(Exception ex)
 		{
 			ex.getStackTrace();
 			return false;
 		}
+		return false;
 	
 	}
 

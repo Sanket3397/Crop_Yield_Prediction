@@ -12,10 +12,12 @@ public class CustomerLoginModel {
 	
 	
 	
-	public int getCustomerId() {
+	public int getCustomerId() 
+	{
 		return customerId;
 	}
-	public void setCustomerId(int customerId) {
+	public void setCustomerId(int customerId)
+	{
 		this.customerId = customerId;
 	}
 	public String getFirstName() {

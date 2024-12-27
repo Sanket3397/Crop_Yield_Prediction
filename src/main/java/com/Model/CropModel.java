@@ -1,6 +1,7 @@
 package com.Model;
 
-public class CropModel {
+public class CropModel 
+{
 	private int cropid;
 	private String cropname;
 	private String fertilizer;
@@ -11,7 +12,8 @@ public class CropModel {
 	private int distId;
 	private int cityId;
 	private float Area;
-	public int getCropid() {
+	public int getCropid() 
+	{
 		return cropid;
 	}
 	public void setCropid(int cropid) {

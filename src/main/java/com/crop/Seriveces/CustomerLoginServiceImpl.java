@@ -11,7 +11,8 @@ public class CustomerLoginServiceImpl implements CustomerLoginService
 	
 	CustomerLoginRepo custologinRepo=  new  CustomerLoginRepoImpl();
 	
-	public boolean isCustomerMatch(String user, String pass) {
+	public boolean isCustomerMatch(String user, String pass) 
+	{
 		// TODO Auto-generated method stub
 		return customerLoginRepo.isCustomerMatch(user, pass);
 	}
@@ -24,8 +25,17 @@ public class CustomerLoginServiceImpl implements CustomerLoginService
 
 
 	@Override
-	public boolean isAddedCustomerLogin() {
+	public boolean isRegCust(String firstName, String lastName, String customerEmail, String password,String customerPhoneNumber, String customerAddress,String dateOfBirth) 
+	{
+		
+		return custologinRepo.isRegCust(firstName, lastName, customerEmail, password, customerPhoneNumber, customerAddress,dateOfBirth);
+	}
+
+
+	@Override
+	public boolean isAddedCustomerLogin(int custid, int cropid, String fertilizer, float ph, float temp, float rainfall,
+			float farm_area, String season, int year, int stateId, int distId, int cityid) {
 		// TODO Auto-generated method stub
-		return custologinRepo.isAddedCustomerLogin();
+		return false;
 	}
 }

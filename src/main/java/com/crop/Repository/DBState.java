@@ -12,7 +12,7 @@ public class DBState
 	protected ResultSet rs= DBConfig.getResult();
 	protected CallableStatement cstmt=DBConfig.getCallStatement();
 	
-	DBState()
+	public DBState()
 	{
 	//	System.out.println(config.getConnection());
 	}

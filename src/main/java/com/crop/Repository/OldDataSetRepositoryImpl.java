@@ -7,85 +7,26 @@ import com.Model.OldDataSetModel;
 
 public class OldDataSetRepositoryImpl  extends DBState implements OldDataSetRepository{
 	
-		
-	
-	
-	public boolean isOldDataSetAdded(OldDataSetModel olddataset) {
-		
-		Scanner sc = new Scanner(System.in);
-		
+
+	@Override
+	public boolean isOldDataSetAdded(int cropid, int Fertilizer, float ph, float temp, float rainfall, float yield,
+			int year, String season, int cityId,String cropname) 
+	{
 		try
 		{
-			
-			
-			System.out.println("Enter the 3 Year Old DataSet :");
-			
-			for(int i=0;i<3;i++)
-			{
-				
-			System.out.println("Enter the Crop Details :");
-			
-			System.err.println("Enter the DataSet Id :");
-			 int datasetId = sc.nextInt();
-			 sc.nextLine();
-			 System.out.println("Enter the Crop Id :");
-			 int cropid = sc.nextInt();
-			 sc.nextLine();
-			 System.out.println("Enter the Crop Fertilizer you have Used : ");
-			 String fertilizer = sc.nextLine();
-			 System.out.println("Enter the Ph Level of Your Soil :");
-			 float pH = sc.nextFloat();
-			 sc.nextLine();
-			 System.out.println("Enter the Temperature you have cultivated the Crop :");
-			 float temp = sc.nextFloat();
-			 sc.nextLine();
-			 
-			 System.out.println("Enter the Annual Rainfall in your Region :");
-			 float rainfall = sc.nextFloat();
-			 sc.nextLine();
-			 
-			 System.out.println("Enter the Previous yield  You have Earned per Acre :");
-			 
-			 float yield = sc.nextFloat();
-			 sc.nextLine();
-			 
-			 System.out.println("Enter the Year of the Crop ");
-			 
-			 int year =sc.nextInt();
-			 sc.nextLine();
-			 
-			 System.out.println("Enter the Season of the Crop :");
-			 
-			 String season =sc.nextLine();
-			 System.out.println("Enter the City Name :");
-			 int cityid = sc.nextInt();
-			 
-			 sc.nextLine();
-			 System.out.println("Enter the District Name :");
-			 int districtId = sc.nextInt();
-			 sc.nextLine();
-			 
-			 System.out.println("Enter the State Name :");
-			 
-			 int stateId =sc.nextInt();			 
-			 
-			stmt = conn.prepareStatement("insert into olddataset values(?,?,?,?,?,?,?,?,?,?,?,?) ");
-			stmt.setInt(1, datasetId);
-			stmt.setInt(2, cropid);
-			stmt.setString(3, fertilizer);
-			stmt.setFloat(4, pH);
-			stmt.setFloat(5, temp);
-			stmt.setFloat(6, rainfall);
-			stmt.setFloat(7, yield);
-			stmt.setInt(8,year);
-			stmt.setString(9, season);
-			stmt.setInt(10, cityid);
-			stmt.setInt(11, districtId);
-			stmt.setInt(12, stateId);
-			
-			
-			int result  = stmt.executeUpdate();
-			
+			stmt=conn.prepareStatement("insert into olddataset values('0',?,?,?,?,?,?,?,?,?,?)");
+			stmt.setInt(1, cropid);
+			stmt.setInt(2, Fertilizer);
+			stmt.setDouble(3, ph);
+			stmt.setFloat(4, temp);
+			stmt.setFloat(5, rainfall);
+			stmt.setFloat(6, yield);
+			stmt.setInt(7, year);
+			stmt.setString(8, season);
+			stmt.setInt(9, cityId);
+			stmt.setString(10,cropname);
+						
+			int result=stmt.executeUpdate();
 			if(result>0)
 			{
 				return true;
@@ -94,20 +35,17 @@ public class OldDataSetRepositoryImpl  extends DBState implements OldDataSetRepo
 			{
 				return false;
 			}
-			
-			}
 		}
-			
-		
-		catch(Exception e)
+		catch(Exception ex)
 		{
-			e.printStackTrace();
+			ex.getStackTrace();
+			return false;
 		}
-
-		return false;
-			
-	}
-
+		
+	}	
+	
+	
+	
 
 	public List<OldDataSetModel> olddataset() {
 		
@@ -115,24 +53,23 @@ public class OldDataSetRepositoryImpl  extends DBState implements OldDataSetRepo
 		{
 			stmt = conn.prepareStatement("select * from olddataset ");
 			rs= stmt.executeQuery();
-			//	 datasetid | cropid | fertilizer | ph   | temp  | rainfall | yield | year | season | cityid | districtId | stateId
+			
 			
 			while(rs.next())
 			{	
-			int datasetid = rs.getInt("datasetid");
-			int cropId = rs.getInt("cropid");
-			String fertilizer = rs.getString("fertilizer");
-			float pH = rs.getFloat("pH");
-			float temp = rs.getFloat("temp");
-			int rainfall = rs.getInt("rainfall");
-			int yield = rs.getInt("yield");
-			int  year = rs.getInt("year");
-			String season = rs.getString("season");
-			int cityId = rs.getInt("cityid");
-			int districtId = rs.getInt("districtId");
-			int stateId = rs.getInt("stateId");
+			int datasetid = rs.getInt(1);
+			int cropId = rs.getInt(2);
+			String fertilizer = rs.getString(3);
+			float pH = rs.getFloat(4);
+			float temp = rs.getFloat(5);
+			int rainfall = rs.getInt(6);
+			int yield = rs.getInt(7);
+			int  year = rs.getInt(8);
+			String season = rs.getString(9);
+			int cityId = rs.getInt(10);
+			
 			System.out.println("\n====================================================\n");
-			System.out.println(" Old_Data_Set_Id : "+datasetid+" cropId : "+cropId+ "Fertilizer :"+fertilizer+"  pH :"+pH+" Temperature :"+temp+" Rainfall :"+rainfall+"  Yield :"+yield+" Season :"+season+" CityId :"+cityId+" District :"+districtId+" StateId :"+stateId);
+			System.out.println(" Old_Data_Set_Id : "+datasetid+" cropId : "+cropId+ "Fertilizer :"+fertilizer+"  pH :"+pH+" Temperature :"+temp+" Rainfall :"+rainfall+"  Yield :"+yield+" Season :"+season+" CityId :"+cityId);
 			System.out.println("\n====================================================\n");
 			}
 		}
@@ -142,5 +79,6 @@ public class OldDataSetRepositoryImpl  extends DBState implements OldDataSetRepo
 		}
 		return null;
 	}
+
 
 }

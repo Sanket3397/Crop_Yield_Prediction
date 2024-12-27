@@ -9,12 +9,16 @@ public class CropServiceImpl implements CropService
 {
 	
 	CropRepository cropRepo=new CropRepositoryImpl();
+
+
 	@Override
-	public boolean isCropAdded(CropModel cropmodel) 
+	public boolean isCropAdded(String cropname, String fertilizer, String temp, Double pH, int rainfall, int stateId,
+			int distId, int cityId, int Area) 
 	{
-		// TODO Auto-generated method stub
-		return cropRepo.isCropAdded(cropmodel);
+	
+		return cropRepo.isCropAdded(cropname, fertilizer, temp, pH, rainfall, stateId, distId, cityId, Area);
 	}
+	
 
 
 	@Override
@@ -22,6 +26,9 @@ public class CropServiceImpl implements CropService
 		// TODO Auto-generated method stub
 		return cropRepo.allCropList();
 	}
-	
+
+
+
+
 
 }

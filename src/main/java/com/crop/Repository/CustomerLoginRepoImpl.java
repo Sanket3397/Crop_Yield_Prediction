@@ -16,8 +16,6 @@ public class CustomerLoginRepoImpl extends DBState implements CustomerLoginRepo{
 			stmt.setString(1, email);
 			rs =stmt.executeQuery();
 			
-		//	 customerId | firstName | lastName | customerEmail  | password  | customerPhoneNumber | customerAddress | dateOfBirth | registrationDate
-			
 			 
 			while(rs.next())
 			{
@@ -43,70 +41,52 @@ public class CustomerLoginRepoImpl extends DBState implements CustomerLoginRepo{
 		
 	}
 
+
+	@Override
+	public boolean isAddedCustomerLogin(int custid, int cropid, String fertilizer, float ph, float temp, float rainfall,
+			float farm_area, String season, int year, int stateId, int distId, int cityid) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isRegCust(String firstName, String lastName, String customerEmail, String password,
+			String customerPhoneNumber, String customerAddress,String dateOfBirth) 
+	{
+		try
+		{
+			System.out.println("HIII");
+			stmt=conn.prepareStatement("insert into  customerlogin(firstName,lastName,customerEmail,password,customerPhoneNumber,customerAddress,dateOfBirth)values(?,?,?,?,?,?,?)");
+			stmt.setString(1, firstName);
+			stmt.setString(2, lastName);
+			stmt.setString(3, customerEmail);
+			stmt.setString(4, password);
+			stmt.setString(5, customerPhoneNumber);
+			stmt.setString(6, customerAddress);
+			stmt.setString(7, dateOfBirth);
+			//stmt.setString(7, registrationDate);
+			
+			int result=stmt.executeUpdate();
+			if(result>0)
+			{
+				System.out.println("Customer added in database");
+				return true;
+				
+			}
+			
+		}
+		catch(Exception ex)
+		{
+			ex.getStackTrace();
+			
+		}
+		return false;
+	}
+
+
 	@Override
 	public boolean isAddedCustomerLogin() {
-
-		/*
-		 * 
-		 * mysql> select * from customerlogin;
-+------------+-----------+----------+------------------------+-----------+---------------------+-----------------+-------------+---------------------+
-| customerId | firstName | lastName | customerEmail          | password  | customerPhoneNumber | customerAddress | dateOfBirth | registrationDate    |
-		 */
-		
-	
-		    try {
-		        // Collect customer details
-		      
-		        
-		        System.out.print("Enter First Name: ");
-		        String firstName = sc.nextLine();
-		        
-		        System.out.print("Enter Last Name: ");
-		        String lastName = sc.nextLine();
-		        
-		        System.out.print("Enter Email: ");
-		        String email = sc.nextLine();
-		        
-		        System.out.print("Enter Password: ");
-		        String password = sc.nextLine();
-		        
-		        System.out.print("Enter Phone Number: ");
-		        String phoneNumber = sc.nextLine();
-		        
-		        System.out.print("Enter Address: ");
-		        String address = sc.nextLine();
-		        
-		        System.out.print("Enter Date of Birth (YYYY-MM-DD): ");
-		        String dateOfBirth = sc.nextLine();
-		        
-		        System.out.print("Enter Registration Date (YYYY-MM-DD): ");
-		        String registrationDate = sc.nextLine();
-
-		       
-	
-		        stmt = conn.prepareStatement( "INSERT INTO customerlogin (firstName, lastName, customerEmail, password, customerPhoneNumber, customerAddress, dateOfBirth, registrationDate) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-		        
-		  
-		        stmt.setString(1, firstName);
-		        stmt.setString(2, lastName);
-		        stmt.setString(3, email);
-		        stmt.setString(4, password);
-		        stmt.setString(5, phoneNumber);
-		        stmt.setString(6, address);
-		        stmt.setString(7, dateOfBirth);
-		        stmt.setString(8, registrationDate);
-
-		        // Execute the update
-		        int rowsInserted = stmt.executeUpdate();
-		        
-		        if (rowsInserted > 0) {
-		            System.out.println("Customer added successfully!");
-		            return true;
-		        }
-		    } catch (Exception e) {
-		        e.printStackTrace();
-		    }
-
-		    return false;
-		}
+		// TODO Auto-generated method stub
+		return false;
+	}
 }
