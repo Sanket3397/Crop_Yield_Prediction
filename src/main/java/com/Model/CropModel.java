@@ -1,17 +1,50 @@
 package com.Model;
+import lombok.*;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class CropModel 
 {
 	private int cropid;
 	private String cropname;
-	private String fertilizer;
-	private float temp;
+	private int fertilizer;
+	private String temp;
 	private float pH;
 	private float rainfall;
 	private int stateId;
 	private int distId;
 	private int cityId;
-	private float Area;
+	private int Area;
+	private String season;
+	
+	public String getSeason() {
+		return season;
+	}
+
+	public void setSeason(String season) {
+		this.season = season;
+	}
+
+	public CropModel() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	public CropModel(int cropid, String cropname, int fertilizer, String temp, float pH, int rainfall, int stateId, int distId,
+			int cityId, int Area, String season) 
+	{
+		this.cropid=cropid;
+		this.cropname=cropname;
+		this.fertilizer=fertilizer;
+		this.temp=temp;
+		this.pH=pH;
+		this.rainfall=rainfall;
+		this.stateId=stateId;
+		this.distId=distId;
+		this.cityId=cityId;
+		this.Area=Area;
+		this.season=season;
+	}
 	public int getCropid() 
 	{
 		return cropid;
@@ -25,16 +58,16 @@ public class CropModel
 	public void setCropname(String cropname) {
 		this.cropname = cropname;
 	}
-	public String getFertilizer() {
+	public int getFertilizer() {
 		return fertilizer;
 	}
-	public void setFertilizer(String fertilizer) {
+	public void setFertilizer(int fertilizer) {
 		this.fertilizer = fertilizer;
 	}
-	public float getTemp() {
+	public String getTemp() {
 		return temp;
 	}
-	public void setTemp(float temp) {
+	public void setTemp(String temp) {
 		this.temp = temp;
 	}
 	public float getpH() {
@@ -67,10 +100,10 @@ public class CropModel
 	public void setCityId(int cityId) {
 		this.cityId = cityId;
 	}
-	public float getArea() {
+	public int getArea() {
 		return Area;
 	}
-	public void setArea(float area) {
+	public void setArea(int area) {
 		Area = area;
 	}
 }

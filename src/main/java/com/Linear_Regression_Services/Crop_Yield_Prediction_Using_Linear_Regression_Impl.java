@@ -22,7 +22,7 @@ public class Crop_Yield_Prediction_Using_Linear_Regression_Impl  implements Crop
 		float cropYield = (m_temp * temp)+(m_rainfall * rainfall)+(m_pH*pH)+ (m_fertilizer *Fertilizer) + valueOfB;
 		
 		
-		return cropYield;
+		return cropYield/1000;
 	}
 
 }

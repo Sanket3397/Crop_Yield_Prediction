@@ -32,14 +32,14 @@ public class CropRepositoryImpl extends DBState implements CropRepository {
 
 
 	@Override
-	public boolean isCropAdded(String cropname, String fertilizer, String temp, Double pH, int rainfall, int stateId,
-			int distId, int cityId, int Area)
+	public boolean isCropAdded(String cropname, int fertilizer, String temp, Double pH, int rainfall, int stateId,
+			int distId, int cityId, int Area,String season)
 	{
 		try
 		{
 			stmt=conn.prepareStatement("insert into crop values('0',?,?,?,?,?,?,?,?,?)");
 			stmt.setString(1, cropname);
-			stmt.setString(2, fertilizer);
+			stmt.setInt(2, fertilizer);
 			stmt.setString(3, temp);
 			stmt.setDouble(4, pH);
 			stmt.setInt(5, rainfall);
@@ -47,7 +47,7 @@ public class CropRepositoryImpl extends DBState implements CropRepository {
 			stmt.setInt(7, distId);
 			stmt.setInt(8, cityId);
 			stmt.setInt(9, Area);
-			
+			stmt.setString(10, season);
 			int result=stmt.executeUpdate();
 			if(result>0)
 			{
@@ -76,7 +76,7 @@ public class CropRepositoryImpl extends DBState implements CropRepository {
 			{
 				int cropId = rs.getInt("cropid");
 				String cropName = rs.getString("cropname");
-				String fertilizer = rs.getString("fertilizer");
+				int fertilizer = rs.getInt("fertilizer");
 				float temp = rs.getFloat("temp");
 				float pH = rs.getFloat("pH");
 				int rainfall = rs.getInt("rainfall");
@@ -84,9 +84,9 @@ public class CropRepositoryImpl extends DBState implements CropRepository {
 				int distId = rs.getInt("distId");
 				int cityId = rs.getInt("cityId");
 				int Area = rs.getInt("Area");
-				
+				String season=rs.getString("season");
 				System.out.println("Crop Id :"+ cropId +"\nCrop Name : "+cropName+ "\nCrop Fertilizer : "+fertilizer+ "\nRegion Temperature :"+temp+"\nSoil pH :"
-						+pH+ "\nRainfall :"+rainfall + "\nState ID :"+stateId+"\nDistName :"+distId+"\nCityId :"+cityId+"\nArea :"+Area);
+						+pH+ "\nRainfall :"+rainfall + "\nState ID :"+stateId+"\nDistName :"+distId+"\nCityId :"+cityId+"\nArea :"+Area+"\n"+"season:"+season);
 				
 			}
 		}

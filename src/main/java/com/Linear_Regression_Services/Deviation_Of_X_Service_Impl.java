@@ -10,26 +10,26 @@ public class Deviation_Of_X_Service_Impl implements Deviation_Of_X_Service {
 	
 	
 	@Override
-	public List<Float> getDeviationOfTemp(String cropName) {
+	public List<Float> getDeviationOfTemp(String cropname) {
 		
-		return devRepo.getDeviationOfTemp(cropName);
+		return devRepo.getDeviationOfTemp(cropname);
 	}
 
 	@Override
-	public List<Float> getDeviationofRainfall(String cropName) {
+	public List<Float> getDeviationofRainfall(String cropname) {
 		
-		return devRepo.getDeviationofRainfall(cropName);
+		return devRepo.getDeviationofRainfall(cropname);
 	}
 
 	@Override
-	public List<Float> getDeviationofpH(String cropName) {
+	public List<Float> getDeviationofpH(String cropname) {
 		
-		return devRepo.getDeviationofpH(cropName);
+		return devRepo.getDeviationofpH(cropname);
 	}
 
 	@Override
-	public List<Float> getDeviationofFertilizer(String cropName) {
+	public List<Float> getDeviationofFertilizer(String cropname) {
 		
-		return devRepo.getDeviationofFertilizer(cropName);
+		return devRepo.getDeviationofFertilizer(cropname);
 	}
 }

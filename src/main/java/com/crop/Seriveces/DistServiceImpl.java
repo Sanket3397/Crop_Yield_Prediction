@@ -35,6 +35,26 @@ public class DistServiceImpl implements DistService
 		
 		return distrepo.getDistrictName(distName);
 	}
+	@Override
+	public boolean isDeleteDist(String distName) {
+		// TODO Auto-generated method stub
+		return distrepo.isDeleteDist(distName);
+	}
+	@Override
+	public boolean isUpdateDist(String currName, String newName) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	@Override
+	public DistModel getDistByName(String distName) {
+		// TODO Auto-generated method stub
+		return distrepo.getDistByName(distName);
+	}
+	@Override
+	public boolean isAddBulkDist(String path) {
+		// TODO Auto-generated method stub
+		return distrepo.isAddBulkDist(path);
+	}
 
 
 

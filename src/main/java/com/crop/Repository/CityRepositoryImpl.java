@@ -18,9 +18,13 @@ public class CityRepositoryImpl extends DBState implements CityRepository
 			
 			boolean b=cstmt.execute();
 			
-			if(b)
+			if(!b)
 			{
 				return true;
+			}
+			else
+			{
+				return false;
 			}
 		}
 		catch(Exception ex)
@@ -28,7 +32,7 @@ public class CityRepositoryImpl extends DBState implements CityRepository
 			ex.getStackTrace();
 			return false;
 		}
-		return false;
+		
 	
 	}
 

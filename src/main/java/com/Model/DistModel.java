@@ -8,6 +8,12 @@ public class DistModel {
 
 	}
 
+	public DistModel(int int1, String string)
+	{
+		this.districtid=int1;
+		this.districtname=string;
+	}
+
 	public int getDistrictid() {
 		return districtid;
 	}

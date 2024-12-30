@@ -26,13 +26,15 @@ public class Product_of_Dev_X_and_Y_Repository_Impl  extends DBState implements 
 	        List<Float> devOfYList = devOf_Y_Repo.deviation_Of_Y(cropname);
 
 	        // Ensure both lists have the same size
-	        if (devOfXList.size() != devOfYList.size()) {
+	        if (devOfXList.size() != devOfYList.size()) 
+	        {
 	            System.out.println("Error: Deviation lists size mismatch.");
 	            return productList; // Return empty list in case of mismatch
 	        }
 
 	        // Calculate the product of deviations for each row
-	        for (int i = 0; i < devOfXList.size(); i++) {
+	        for (int i = 0; i < devOfXList.size(); i++)
+	        {
 	            float productOfDev_X_Y = devOfXList.get(i) * devOfYList.get(i);
 	            productList.add(productOfDev_X_Y); // Add to product list
 	        }

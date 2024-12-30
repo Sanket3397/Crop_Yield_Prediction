@@ -25,10 +25,10 @@ public class CustomerLoginServiceImpl implements CustomerLoginService
 
 
 	@Override
-	public boolean isRegCust(String firstName, String lastName, String customerEmail, String password,String customerPhoneNumber, String customerAddress,String dateOfBirth) 
+	public boolean isRegCust(String firstName, String lastName, String customerEmail, String password,String customerPhoneNumber, String customerAddress) 
 	{
 		
-		return custologinRepo.isRegCust(firstName, lastName, customerEmail, password, customerPhoneNumber, customerAddress,dateOfBirth);
+		return custologinRepo.isRegCust(firstName, lastName, customerEmail, password, customerPhoneNumber, customerAddress);
 	}
 
 
@@ -38,4 +38,13 @@ public class CustomerLoginServiceImpl implements CustomerLoginService
 		// TODO Auto-generated method stub
 		return false;
 	}
+
+
+	@Override
+	public List<CustomerLoginModel> custDetail() {
+		// TODO Auto-generated method stub
+		return custologinRepo.custDetail();
+	}
+
+
 }

@@ -12,10 +12,10 @@ public class OldDataSetServiceImpl implements OldDataSetService
 
 
 	@Override
-	public boolean isOldDataSetAdded(int cropid, int Fertilizer, float ph, float temp, float rainfall, float yield,
+	public boolean isOldDataSetAdded(int Fertilizer, float ph, float temp, float rainfall, float yield,
 			int year, String season, int cityId,String cropname) {
 		// TODO Auto-generated method stub
-		return olddataRepo.isOldDataSetAdded(cropid, Fertilizer, ph, temp, rainfall, yield, year, season, cityId,cropname);
+		return olddataRepo.isOldDataSetAdded(Fertilizer, ph, temp, rainfall, yield, year, season, cityId,cropname);
 	}
 
 

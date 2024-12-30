@@ -16,7 +16,7 @@ public class DeviationOf_X_Repository_Impl extends DBState implements DeviationO
 	    try {
 	        // Get the mean temperature for the crop
 	        float meanOfTemp = getminOfX.getMinOfTemp(cropname);
-	        System.out.println("The Mean of X is: " + meanOfTemp);
+	        //System.out.println("The Mean of X is: " + meanOfTemp);
 
 	       
 	        stmt = conn.prepareStatement("select temp from olddataset where cropname = ?");
@@ -26,12 +26,12 @@ public class DeviationOf_X_Repository_Impl extends DBState implements DeviationO
 	       
 	        while (rs.next()) {
 	            int temp = rs.getInt("temp");
-	            System.out.println("The temp is: " + temp);
+	            //System.out.println("The temp is: " + temp);
 
 	            float deviation = temp - meanOfTemp;
 	            deviations.add(deviation);
 
-	            System.out.println("Deviation of X: " + deviation);
+	         //   System.out.println("Deviation of X: " + deviation);
 	        }
 
 	        return deviations; 
@@ -45,28 +45,28 @@ public class DeviationOf_X_Repository_Impl extends DBState implements DeviationO
 	
 	
 	@Override
-	public List<Float> getDeviationofRainfall(String cropName) {
+	public List<Float> getDeviationofRainfall(String cropname) {
 		
 		 List<Float> deviations = new ArrayList<>();
 		    try {
 		        // Get the mean temperature for the crop
-		        float meanOfRainfall = getminOfX.getMinofRainfall(cropName);
-		        System.out.println("The Mean of X is: " + meanOfRainfall);
+		        float meanOfRainfall = getminOfX.getMinofRainfall(cropname);
+		       // System.out.println("The Mean of X is: " + meanOfRainfall);
 
 		       
 		        stmt = conn.prepareStatement("select rainfall from olddataset where cropname = ?");
-		        stmt.setString(1, cropName);
+		        stmt.setString(1, cropname);
 		        rs = stmt.executeQuery();
 
 		       
 		        while (rs.next()) {
 		            int rainfall = rs.getInt("rainfall");
-		            System.out.println("The Rainfall is: " + rainfall);
+		           // System.out.println("The Rainfall is: " + rainfall);
 
 		            float deviation = rainfall - meanOfRainfall;
 		            deviations.add(deviation);
 
-		            System.out.println("Deviation of X Rainfall : " + deviation);
+		            //System.out.println("Deviation of X Rainfall : " + deviation);
 		        }
 
 		        return deviations; 
@@ -79,28 +79,28 @@ public class DeviationOf_X_Repository_Impl extends DBState implements DeviationO
 		}
 	
 	@Override
-	public List<Float> getDeviationofpH(String cropName) {
+	public List<Float> getDeviationofpH(String cropname) {
 		List<Float> deviations = new ArrayList<>();
 	    try {
 	        // Get the mean temperature for the crop
-	        float meanOfpH = getminOfX.getMinOfpH(cropName);
-	        System.out.println("The Mean of X  Pis: " + meanOfpH);
+	        float meanOfpH = getminOfX.getMinOfpH(cropname);
+	       // System.out.println("The Mean of X  Pis: " + meanOfpH);
 
 	       
 	        stmt = conn.prepareStatement("select pH from olddataset where cropname = ?");
-	        stmt.setString(1, cropName);
+	        stmt.setString(1, cropname);
 	        rs = stmt.executeQuery();
 
 	       
 	        while (rs.next()) {
 	            int pH = rs.getInt("pH");
 	            
-	            System.out.println("The pH is: " + pH);
+	        //    System.out.println("The pH is: " + pH);
 
 	            float deviation = pH - meanOfpH;
 	            deviations.add(deviation);
 
-	            System.out.println("Deviation of X Rainfall : " + deviation);
+	           // System.out.println("Deviation of X Rainfall : " + deviation);
 	        }
 
 	        return deviations; 
@@ -113,29 +113,29 @@ public class DeviationOf_X_Repository_Impl extends DBState implements DeviationO
 	}
 	
 	@Override
-	public List<Float> getDeviationofFertilizer(String cropName) {
+	public List<Float> getDeviationofFertilizer(String cropname) {
 		
 		List<Float> deviations = new ArrayList<>();
 	    try {
 	        // Get the mean temperature for the crop
-	        float meanOfFertilizer = getminOfX.getMinOfFertilizer(cropName);
-	        System.out.println("The Mean of X  Fertilizer  " + meanOfFertilizer);
+	        float meanOfFertilizer = getminOfX.getMinOfFertilizer(cropname);
+	      //  System.out.println("The Mean of X  Fertilizer  " + meanOfFertilizer);
 
 	       
 	        stmt = conn.prepareStatement("select Fertilizer from olddataset where cropname = ?");
-	        stmt.setString(1, cropName);
+	        stmt.setString(1, cropname);
 	        rs = stmt.executeQuery();
 
 	       
 	        while (rs.next()) {
 	            int Fertilizer = rs.getInt("Fertilizer");
 	            
-	            System.out.println("The fertilizer is: " + Fertilizer);
+	          //  System.out.println("The fertilizer is: " + Fertilizer);
 
 	            float deviation = Fertilizer - meanOfFertilizer;
 	            deviations.add(deviation);
 
-	            System.out.println("Deviation of X Rainfall : " + deviation);
+	          //  System.out.println("Deviation of X Rainfall : " + deviation);
 	        }
 
 	        return deviations; 

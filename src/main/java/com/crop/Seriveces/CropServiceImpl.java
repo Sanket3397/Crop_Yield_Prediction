@@ -12,11 +12,11 @@ public class CropServiceImpl implements CropService
 
 
 	@Override
-	public boolean isCropAdded(String cropname, String fertilizer, String temp, Double pH, int rainfall, int stateId,
-			int distId, int cityId, int Area) 
+	public boolean isCropAdded(String cropname, int fertilizer, String temp, Double pH, int rainfall, int stateId,
+			int distId, int cityId, int Area,String season) 
 	{
 	
-		return cropRepo.isCropAdded(cropname, fertilizer, temp, pH, rainfall, stateId, distId, cityId, Area);
+		return cropRepo.isCropAdded(cropname, fertilizer, temp, pH, rainfall, stateId, distId, cityId, Area,season);
 	}
 	
 

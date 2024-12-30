@@ -135,8 +135,20 @@ public  class StateRepositoryImpl extends DBState implements StateRepository
 
 
 	@Override
-	public boolean isUpdateState(String currName, String newName) {
-		// TODO Auto-generated method stub
+	public boolean isUpdateState(String currName, String newName)
+	{
+		try
+		{
+			StateModel stateId=this.getStateByName(currName);
+			stmt=conn.prepareStatement("update statemaster set stateName=? where stateName=?");
+			stmt.setString(1, newName);
+			//stmt.setInt(1, stateId);
+		}
+		catch(Exception ex)
+		{
+			ex.getStackTrace();
+		}
+		
 		return false;
 	}
 

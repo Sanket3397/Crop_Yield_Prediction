@@ -30,16 +30,16 @@ public class Get_Min_of_X_Repo_Impl extends DBState implements GetMinOf_X_Reposi
 	}
 
 
-	public float getMinofRainfall(String cropName) {
+	public float getMinofRainfall(String cropname) {
 	
 		try
 		{
 			stmt=conn.prepareStatement("select avg(rainfall) from olddataset where cropname = ?");
-			stmt.setString(1, cropName);
+			stmt.setString(1, cropname);
 			rs=stmt.executeQuery();
 			if(rs.next())
 			{
-				return rs.getInt(1);
+				return rs.getFloat(1);
 			}
 			else
 			{
@@ -54,16 +54,16 @@ public class Get_Min_of_X_Repo_Impl extends DBState implements GetMinOf_X_Reposi
 	}
 
 	
-	public float getMinOfpH(String cropName) {
+	public float getMinOfpH(String cropname) {
 
 		try
 		{
 			stmt=conn.prepareStatement("select avg(pH) from olddataset where cropname = ?");
-			stmt.setString(1, cropName);
+			stmt.setString(1, cropname);
 			rs=stmt.executeQuery();
 			if(rs.next())
 			{
-				return rs.getInt(1);
+				return rs.getFloat(1);
 			}
 			else
 			{
@@ -78,15 +78,15 @@ public class Get_Min_of_X_Repo_Impl extends DBState implements GetMinOf_X_Reposi
 	}
 
 	
-	public float getMinOfFertilizer(String cropName) {
+	public float getMinOfFertilizer(String cropname) {
 		try
 		{
 			stmt=conn.prepareStatement("select avg(Fertilizer) from olddataset where cropname = ?");
-			stmt.setString(1, cropName);
+			stmt.setString(1, cropname);
 			rs=stmt.executeQuery();
 			if(rs.next())
 			{
-				return rs.getInt(1);
+				return rs.getFloat(1);
 			}
 			else
 			{
@@ -101,15 +101,15 @@ public class Get_Min_of_X_Repo_Impl extends DBState implements GetMinOf_X_Reposi
 		return 0;
 	}
 
-	public float getMinOfYeild(String cropName) {
+	public float getMinOfYeild(String cropname) {
 		try
 		{
 			stmt=conn.prepareStatement("select avg(yield) from olddataset where cropname =? ");
-			stmt.setString(1, cropName);
+			stmt.setString(1, cropname);
 			rs=stmt.executeQuery();
 			if(rs.next())
 			{
-				return rs.getInt(1);
+				return rs.getFloat(1);
 			}
 			else
 			{

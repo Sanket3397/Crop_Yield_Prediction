@@ -4,12 +4,12 @@ import com.crop.Repository.DBState;
 
 public class GetMin_Of_Y_Repository_Impl  extends DBState implements GetMInOf_Y_Repository{
 
-	public float getMinOfYeild(String cropName)
+	public float getMinOfYeild(String cropname)
 	{
 			try
 			{
 				stmt =conn.prepareStatement("select avg(yield) from olddataset where cropname = ?");
-				stmt.setString(1, cropName);
+				stmt.setString(1, cropname);
 				rs=stmt.executeQuery();
 				
 				if(rs.next())

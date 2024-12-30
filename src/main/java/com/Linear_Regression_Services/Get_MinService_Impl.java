@@ -6,27 +6,27 @@ public class Get_MinService_Impl implements GetMinOfXService {
 
 	GetMinOf_X_Repository getminOfXRepo=  new Get_Min_of_X_Repo_Impl();
 	
-	public float getMinOfTemp(String cropName)
+	public float getMinOfTemp(String cropname)
 	{
-		return getminOfXRepo.getMinOfTemp(cropName);
+		return getminOfXRepo.getMinOfTemp(cropname);
 	}
 
 	
-	public float getMinofRainfall(String cropName) {
+	public float getMinofRainfall(String cropname) {
 		
-		return getminOfXRepo.getMinofRainfall(cropName);
+		return getminOfXRepo.getMinofRainfall(cropname);
 	}
 
 	
-	public float getMinOfpH(String cropName) {
+	public float getMinOfpH(String cropname) {
 		// TODO Auto-generated method stub
-		return getminOfXRepo.getMinOfpH(cropName);
+		return getminOfXRepo.getMinOfpH(cropname);
 	}
 
 	
-	public float getMinOfFertilizer(String cropName) {
+	public float getMinOfFertilizer(String cropname) {
 		// TODO Auto-generated method stub
-		return getminOfXRepo.getMinOfFertilizer(cropName);
+		return getminOfXRepo.getMinOfFertilizer(cropname);
 	}
 
 

@@ -9,22 +9,22 @@ public class OldDataSetRepositoryImpl  extends DBState implements OldDataSetRepo
 	
 
 	@Override
-	public boolean isOldDataSetAdded(int cropid, int Fertilizer, float ph, float temp, float rainfall, float yield,
+	public boolean isOldDataSetAdded(int Fertilizer, float ph, float temp, float rainfall, float yield,
 			int year, String season, int cityId,String cropname) 
 	{
 		try
 		{
-			stmt=conn.prepareStatement("insert into olddataset values('0',?,?,?,?,?,?,?,?,?,?)");
-			stmt.setInt(1, cropid);
-			stmt.setInt(2, Fertilizer);
-			stmt.setDouble(3, ph);
-			stmt.setFloat(4, temp);
-			stmt.setFloat(5, rainfall);
-			stmt.setFloat(6, yield);
-			stmt.setInt(7, year);
-			stmt.setString(8, season);
-			stmt.setInt(9, cityId);
-			stmt.setString(10,cropname);
+			stmt=conn.prepareStatement("insert into olddataset values('0',?,?,?,?,?,?,?,?,?)");
+			
+			stmt.setInt(1, Fertilizer);
+			stmt.setDouble(2, ph);
+			stmt.setFloat(3, temp);
+			stmt.setFloat(4, rainfall);
+			stmt.setFloat(5, yield);
+			stmt.setInt(6, year);
+			stmt.setString(7, season);
+			stmt.setInt(8, cityId);
+			stmt.setString(9,cropname);
 						
 			int result=stmt.executeUpdate();
 			if(result>0)
@@ -58,19 +58,19 @@ public class OldDataSetRepositoryImpl  extends DBState implements OldDataSetRepo
 			while(rs.next())
 			{	
 			int datasetid = rs.getInt(1);
-			int cropId = rs.getInt(2);
-			String fertilizer = rs.getString(3);
-			float pH = rs.getFloat(4);
-			float temp = rs.getFloat(5);
-			int rainfall = rs.getInt(6);
-			int yield = rs.getInt(7);
-			int  year = rs.getInt(8);
-			String season = rs.getString(9);
-			int cityId = rs.getInt(10);
+			int fertilizer = rs.getInt(2);
+			float pH = rs.getFloat(3);
+			float temp = rs.getFloat(4);
+			int rainfall = rs.getInt(5);
+			float yield = rs.getFloat(6);
+			int  year = rs.getInt(7);
+			String season = rs.getString(8);
+			int cityid=rs.getInt(9);
+			String cropname = rs.getString(10);
 			
-			System.out.println("\n====================================================\n");
-			System.out.println(" Old_Data_Set_Id : "+datasetid+" cropId : "+cropId+ "Fertilizer :"+fertilizer+"  pH :"+pH+" Temperature :"+temp+" Rainfall :"+rainfall+"  Yield :"+yield+" Season :"+season+" CityId :"+cityId);
-			System.out.println("\n====================================================\n");
+			System.out.println("\n===============================================================================================================================================================================================\n");
+			System.out.println("Old_Data_Set_Id : "+datasetid+"\ncropname: "+cropname+ "\nFertilizer :"+fertilizer+"\npH :"+pH+"\nTemperature :"+temp+"\nRainfall :"+rainfall+"\nYield :"+yield+"\nSeason :"+season+"\nCityId :"+cityid);
+			System.out.println("\n===============================================================================================================================================================================================\n");
 			}
 		}
 		catch(Exception e)
